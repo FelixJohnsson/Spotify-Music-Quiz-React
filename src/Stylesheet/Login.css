@@ -1,0 +1,59 @@
+@font-face {
+    font-family: Spotify;
+    src: url('../Gotham-Font/Gotham-Black.otf');
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Spotify;
+}
+
+p{
+    color: white;
+}
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+}
+#spotify-logo-text > b{
+    font-size: 25px;
+}
+#spotify-logo-text > i{
+    font-size: 15px;
+    position: absolute;
+    transform: translate(5px, 5px);
+
+}
+#container{
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    height: 500px;
+    width: 800px;
+    text-align: center;
+}
+#container > #title-text {
+    margin-top: 10%;
+    font-size: 50px;
+    height:70%;
+}
+#background{
+    background-image: url("./crowd.jpg");
+    background-repeat: fill;
+    background-size: cover;
+    background-position: center;
+
+    height: 100vh;
+    width: 100vw;
+}
+button{
+    color: white;
+    font-size: 30px;
+    background-color: #1DB954;
+    border: none;
+    border-radius: 60px;
+    height: 100px;
+    width: 250px;
+}
