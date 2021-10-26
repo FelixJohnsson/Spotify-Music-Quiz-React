@@ -30,17 +30,20 @@ code {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -70%);
-    height: 500px;
-    width: 800px;
+    height: 400px;
+    width: 1000px;
     text-align: center;
 }
 #container > #title-text {
     margin-top: 10%;
-    font-size: 50px;
+    font-size: 70px;
     height:70%;
 }
+#logo{
+    height: 50px;
+}
 #background{
-    background-image: url("./crowd.jpg");
+    background-image: url("./crowd.png");
     background-repeat: fill;
     background-size: cover;
     background-position: center;
@@ -54,6 +57,6 @@ button{
     background-color: #1DB954;
     border: none;
     border-radius: 60px;
-    height: 100px;
+    height: 75px;
     width: 250px;
 }

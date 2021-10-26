@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Stylesheet/Login.css';
+import logo from '../Stylesheet/spotify-logo.png';
 
 class Login extends React.Component {
     state = {
@@ -11,8 +12,8 @@ class Login extends React.Component {
         return (
             <div id="background">
                 <div id="container">
-                    <p id="spotify-logo-text"><b>Spotify | </b> <i>Quiz</i></p>
-                    <p id="title-text">Show your friends who the real <b id="wrapper"><kbd id="artist-name">Lady gaga</kbd></b> fan is. </p>
+                    <img src={logo} id="logo"></img>
+                    <p id="title-text">Show your friends who the real <b id="wrapper"><kbd id="artist-name">Chet Baker</kbd></b> fan is. </p>
                     <button>Get started</button>
                 </div>
                 
