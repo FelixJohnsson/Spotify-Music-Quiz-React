@@ -1,20 +1,13 @@
 import React from 'react';
 
-console.log(window.location.href)
-if(window.location.href !== 'http://localhost:3000/'){
+
     const array = window.location.href.split('/')[4].split('&');
-    /*const access_token = array[0].split('=')[1];
+    const access_token = array[0].split('=')[1];
     const refresh_token = array[1].split('=')[1];
     const id = array[2].split('=')[1];
-    const username = array[3].split('=')[1];*/
-}
+    const username = array[3].split('=')[1];
 
-const get_user_URL = 'http://localhost:5000/get_user/felle21';
-
-
-    
-
-    
+    const get_user_URL = 'http://localhost:5000/get_user/felle21';
 
 class Sidebar extends React.Component {
     
@@ -41,7 +34,7 @@ class Sidebar extends React.Component {
             <p></p>
             <div id="wrapper">
                 <div className="sidebar-category-div">
-                    <p>Username: {'username'}</p>
+                    <p>Username: {username}</p>
                 </div>
             </div>
         </div>

@@ -1,7 +1,11 @@
 @font-face {
     font-family: Spotify;
     src: url('../Gotham-Font/Gotham-Black.otf');
-  }
+}
+@font-face {
+font-family: Spotify-thin;
+src: url('../Gotham-Font/Gotham-Thin.otf');
+}
 
 * {
     margin: 0;
@@ -59,4 +63,76 @@ button{
     border-radius: 60px;
     height: 75px;
     width: 250px;
+    cursor: pointer;
 }
+
+#login-div{
+    display: none;
+    font-family:'Gotham-bold';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 470px;
+    width: 800px;
+    background-color: rgb(20, 20, 20);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
+  }
+  
+  #login-div > #login-p{
+    font-family:'Gotham-Light';
+    font-size: 15px;
+    color: white;
+    margin-top: 50px;
+    margin: 30px;
+  }
+
+  #login-div > img{
+      margin: 25px;
+  }
+  #login-div > button{
+      height: 50px;
+      margin: 50px; 
+      margin-top: 0px; 
+      font-size: 25px;
+  }
+  #decline-button{
+      background-color: rgb(51, 51, 51);
+  }
+  .tac{
+      font-size: 19px;
+      color: white;
+  }
+
+  .tac-sub-text{
+    font-size: 17px;
+    color: white;
+    margin: 30px;
+  }
+  #tac-scroll-div{
+    font-family: Spotify-thin;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 200px;
+    width: 90%;
+    margin: 35px;
+  }
+  #tac-scroll-div > p{
+    font-family: Spotify-thin;
+  }
+
+  .fade-in{
+    display: block;
+    animation-name: fade-in;
+    animation-fill-mode:forwards;
+    animation-duration: 1s;
+    z-index: 1000;
+    filter: blur(-10px);
+  }
+
+  @keyframes fade-in {
+    from {opacity: 0}
+    to {opacity: 1}
+  }

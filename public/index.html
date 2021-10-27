@@ -44,10 +44,15 @@
     -->
   </body>
   <script>
-    let array = ['Elvis', 'ABBA', 'Europe', 'Michael Jackson']
+
+    let array = ['Coldplay', 'The Beatles', 'Europe', 'Michael Jackson', 'Young Thug', 'Mac Miller', 'Doja Cat', 'Harry Styles', 'Glass Animals', 'Kendrick Lamar', 'Elton John'];
+    array.sort(() => Math.random() - 0.5);    
     let counter = 0;
+
+  
+    const print_artist_names = () => {
     $(document.getElementById('title-text')).t({
-    caret: false
+      caret: false
     });
     setInterval(() => {
       counter++;
@@ -58,7 +63,10 @@
           caret:false
         });
     }, 4000)
-  
+    }
+    if(window.location.href === "http://localhost:3000/"){
+      print_artist_names();
+    }
   
   
   </script>
