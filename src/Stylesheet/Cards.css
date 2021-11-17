@@ -1,0 +1,36 @@
+@font-face {
+    font-family: Spotify-thin;
+    src: url('../Gotham-Font/Gotham-Thin.otf');
+}
+
+.playlist-card{
+    height: 250px;
+    width: 200px;
+    background-color: #1a1a1a;
+    margin: 20px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+.playlist-card:hover{
+    background-color: #292929;
+}
+.playlist-card img{
+    margin-top: 10px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 1px 1px 9px 1px rgb(10, 10, 10); 
+}
+.playlist-card-title{
+font-family: Spotify;
+padding: 10px;
+}
+.playlist-card-description{
+    font-family: Spotify-thin;
+    padding: 10px;
+}
+
+@keyframes fade-in-on-hover {
+    from{background-color: #1a1a1a;}
+    to{background-color: #2b2b2b;}
+}

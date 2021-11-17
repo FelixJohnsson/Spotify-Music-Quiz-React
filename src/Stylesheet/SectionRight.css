@@ -1,0 +1,20 @@
+#section-right{
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% - 200px);
+    overflow-y: scroll;
+    height: 100vh;
+    max-height: 100vh;
+    align-content: flex-start;
+    position:absolute;
+    left: 200px;
+}
+#top-section{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+#top-section p{
+    padding: 25px 0px 0px 25px;
+}

@@ -9,7 +9,7 @@ import '../Stylesheet/Logged_in.css';
 class Logged_in extends React.Component {
     constructor(){
         super();
-            this.get_user_from_local = 'http://localhost:5000/get_user/felle21';
+            this.get_user_from_local_URL = 'http://localhost:5000/get_user/felle21';
             this.array = window.location.href.split('/')[4].split('&');
 
             this.tokens = {
@@ -28,7 +28,7 @@ class Logged_in extends React.Component {
 
 
     async componentDidMount(){
-        let local_user =  await fetch(this.get_user_from_local);
+        let local_user =  await fetch(this.get_user_from_local_URL);
         let local_user_data = await local_user.json();
         let spotify_user_data = await fetch(`https://api.spotify.com/v1/me`,{
             headers: {

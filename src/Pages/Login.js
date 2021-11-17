@@ -14,7 +14,7 @@ class Login extends React.Component {
             <div id="background">
                 <div id="container">
                     <img src={logo} id="logo"></img>
-                    <p id="title-text">Show your friends who the real <b id="wrapper"><kbd id="artist-name">Chet Baker</kbd></b> fan is. </p>
+                    <p id="title-text">Show your friends who the real <b id="b-wrapper"><kbd id="artist-name">Chet Baker</kbd></b> fan is. </p>
                     <button onClick={open_login_div}>Get started</button>
                 </div>
             </div>
