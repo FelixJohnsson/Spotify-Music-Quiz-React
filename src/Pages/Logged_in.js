@@ -19,18 +19,33 @@ class Logged_in extends React.Component {
 
     state = {
         loading: true,
-        local_user_info: null
+        local_user_info: null,
+        spotify_user_info: null
     }
 
     async componentDidMount(){
-        let res = await fetch(this.get_user_from_local);
-        let data = await res.json();
-        console.log(data)
-        this.setState({local_user_info:data.content, loading:false})
+        let local_user =  await fetch(this.get_user_from_local);
+        let local_user_data = await local_user.json();
+        let spotify_user_data = await fetch(`https://api.spotify.com/v1/me`,{
+            headers: {
+                Accept: "application/json",
+                Authorization: "Bearer " + this.data.access_token,
+                "Content-Type": "application/json"
+              }
+        })
+        .then(res => res.json())
+        .then(data => data)
+
+        
+        this.setState({
+            local_user_info: local_user_data.content,
+            loading :false, 
+            spotify_user_info: spotify_user_data
+        })
     }
     render(){
         return(
-            <Sidebar data={this.data}/>
+            <Sidebar data={this.data} state={this.state}/>
         )
         
     }

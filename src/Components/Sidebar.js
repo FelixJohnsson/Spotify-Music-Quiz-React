@@ -1,12 +1,6 @@
 import React from 'react';
 
 
-
-
-    
-
-    
-
 class Sidebar extends React.Component {
     
 
@@ -14,7 +8,8 @@ class Sidebar extends React.Component {
         return(
             
         <div id="left-sidebar">
-                <p>You're logged in.</p>
+            {this.props.state.loading ? <p>Loading ...</p> : <p>You're logged in.</p>}
+                
             <div id="wrapper">
                 <div className="sidebar-category-div">
                     <p>Username: {this.props.data.username}</p>
