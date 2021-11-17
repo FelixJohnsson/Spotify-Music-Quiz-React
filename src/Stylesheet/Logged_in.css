@@ -1,0 +1,35 @@
+#left-sidebar{
+    width: 200px;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    text-align: center;
+    font-size: 14px;
+  }
+  .sidebar-category-div{
+    height: 50px;
+    width: 100%;
+    background-color: rgb(43, 43, 43);
+    border: solid black 1px;
+  }
+  .sidebar-category-div > p{
+    margin: 15px;
+    text-align: center;
+  }
+  #wrapper{
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+  }
+  #avatar{
+      height: 75px;
+      width: 75px;
+      margin: 20px 0px 20px 0px;
+      border: solid #1DB954 2px;
+  }
+  #logged-in-p{
+      margin-top: 20px;
+  }

@@ -33,28 +33,6 @@ h1{
   cursor: pointer;
 }
 
-#left-sidebar{
-  width: 200px;
-  height: 100vh;
-  background-color: black;
-  color: white;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  text-align: center;
-  font-size: 14px;
-}
-.sidebar-category-div{
-  height: 50px;
-  width: 100%;
-  background-color: rgb(43, 43, 43);
-  border: solid black 1px;
-}
-.sidebar-category-div > p{
-  margin: 15px;
-  text-align: left;
-}
-
 
 ::-webkit-scrollbar {
   width: 4px;
