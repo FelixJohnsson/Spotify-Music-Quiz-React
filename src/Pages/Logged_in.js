@@ -45,6 +45,7 @@ class Logged_in extends React.Component {
             loading :false, 
             spotify_user_info: spotify_user_data
         })
+        console.log(this.tokens.access_token)
     }
     render(){
         return(
