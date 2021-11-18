@@ -5,6 +5,10 @@
 
 ## Landing page
   Login through the Spotify oAuth
+  ![Landing page](https://i.ibb.co/r6JFHQN/landingpage.png)
+  
+### Login in
+  ![Login in](https://i.ibb.co/bXW2qy3/login.png)
   
 ## Logged in
   Page for selecting/importing a playlist to initiliaze a room with.
