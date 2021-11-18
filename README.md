@@ -1,4 +1,7 @@
-# React & Material UI
+#Spotify Quiz web app
+### Connected to (backend) https://github.com/FelixJohnsson/Spotify-Music-Quiz-API
+
+## Using React & Material UI
 
 ##Landing page
   Login through the Spotify oAuth
