@@ -6,12 +6,13 @@ import '../Stylesheet/Logged_in.css';
 
 const Logged_in = (props) => {
     const URL_array = window.location.href.split('/')[4].split('&');
-    const tokens = {
+    const url_tokens = {
         access_token: URL_array[0].split('=')[1],
         refresh_token: URL_array[1].split('=')[1],
         id: URL_array[2].split('=')[1],
         username: URL_array[3].split('=')[1]
     }
+    const [tokens, setTokens] = useState(url_tokens)
     const [localUserState, setlocalUserState] = useState(false);
     const [spotifyUser, setspotifyUser] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -40,12 +41,22 @@ const Logged_in = (props) => {
         fetch_data();
     }, [])
 
-    return(
+    if(spotifyUser){
+        return(
+            <div>
+                <Sidebar spotify_user={spotifyUser} loading={loading}/>
+                <SectionRight spotify_user={spotifyUser} tokens={tokens} />
+            </div>
+        )
+    } else {
+        return(
         <div>
             <Sidebar spotify_user={spotifyUser} loading={loading}/>
-            <SectionRight data={spotifyUser}/>
         </div>
-    )
+        )
+
+    }
+
 }
 
 
