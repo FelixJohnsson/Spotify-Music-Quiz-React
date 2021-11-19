@@ -17,17 +17,19 @@
 }
 .playlist-card img{
     margin-top: 10px;
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     box-shadow: 1px 1px 9px 1px rgb(10, 10, 10); 
 }
 .playlist-card-title{
-font-family: Spotify;
-padding: 10px;
+    font-family: Spotify;
+    padding: 10px;
+    font-size: 14px;
 }
 .playlist-card-description{
     font-family: Spotify-thin;
     padding: 10px;
+    font-size: 12px;
 }
 
 @keyframes fade-in-on-hover {
