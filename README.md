@@ -12,6 +12,7 @@
   
 ## Logged in
   Page for selecting/importing a playlist to initiliaze a room with.
+  ![Logged in](https://i.ibb.co/vsxBgyf/logged-in.png)
 
 ## Room
   Should act like a 'Kahoot' room where users can connect to and guess on the track.
