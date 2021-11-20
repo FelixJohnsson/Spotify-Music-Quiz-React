@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from '../Components/Sidebar'
-import '../Stylesheet/Room.css'
+import Sidebar from '../Components/Sidebar';
+import RoomRight from '../Components/RoomRight';
+import '../Stylesheet/Room.css';
 
 
 const Room =  (props) => {
@@ -11,21 +12,21 @@ const Room =  (props) => {
     spotify_user =  JSON.parse(spotify_user)
     
     useEffect(() => {
-        setSpotifyUser(spotify_user);
+        
         fetch('http://localhost:5000/get_room/1')
         .then(res => res.json())
         .then(data => {
             setRoomData(data.content[0]);
             setLoading(false);
+            setSpotifyUser(spotify_user);
         })
         
     }, [])
     
-    console.log(room_data)
     return (
         <div>
-            <Sidebar spotify_user={spotify_user}/>
-            {loading ? <p>Loading ...</p> : <p>This is room number: {room_data.id}</p>}
+            <Sidebar spotify_user={spotify_user_data}/>
+            <RoomRight spotify_user={spotify_user_data} room_data={room_data} loading={loading}/>
         </div>
     )
 }
