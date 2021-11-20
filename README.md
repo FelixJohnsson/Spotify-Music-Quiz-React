@@ -16,5 +16,5 @@
 
 ## Room
   Should act like a 'Kahoot' room where users can connect to and guess on the track.
-  Should accept guests (without spotify accounts)
+  Should ALSO accept guests (without spotify accounts)
   ![Room](https://i.ibb.co/p05qjNr/room.png)
