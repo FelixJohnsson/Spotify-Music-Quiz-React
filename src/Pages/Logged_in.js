@@ -34,7 +34,8 @@ const Logged_in = (props) => {
             })
             .then(res => res.json())
             .then(data => {
-                setspotifyUser(data)
+                setspotifyUser(data);
+                localStorage.setItem('spotify_user_data', JSON.stringify(data));
             })
             setLoading(false);
         }

@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import '../Stylesheet/Logged_in.css'
 
 const Sidebar = (props) => {
-    console.log(props)
     return(
         <div id="left-sidebar">
             {props.loading ? <p id="logged-in-p">Loading ...</p> : <p id="logged-in-p">You're logged in.</p>}

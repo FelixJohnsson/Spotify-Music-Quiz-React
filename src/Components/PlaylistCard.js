@@ -1,11 +1,13 @@
 import '../Stylesheet/Cards.css'
+import { useHistory } from "react-router-dom";
 
 const PlaylistCard = (props) => {
-        const body = {
-            URI:props.playlist_object.URI,
-            token: props.tokens.access_token,
-            id: props.spotify_user.display_name
-        }
+    const history = useHistory();
+    const body = {
+        URI:props.playlist_object.URI,
+        token: props.tokens.access_token,
+        id: props.spotify_user.display_name
+    }
     return (
     <div className="playlist-card" onClick={(async (e) => {
 
@@ -18,7 +20,7 @@ const PlaylistCard = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            history.push(`/room/${data.content.id}`);
         })
     })}>
         <img src={props.playlist_object.img_src}></img>

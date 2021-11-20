@@ -1,20 +1,31 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../Components/Sidebar'
 import '../Stylesheet/Room.css'
 
 
-const Room =  () => {
-    const [user_state, setState] = useState([{
-        loading: false,
-        display_name: 'guest',
-        img_src: null
-    }]);
-
-    console.log(user_state)
+const Room =  (props) => {
+    const [loading, setLoading] = useState(true);
+    const [spotify_user_data, setSpotifyUser] = useState(false);
+    const [room_data, setRoomData] = useState(false);
+    let spotify_user = localStorage.getItem('spotify_user_data');
+    spotify_user =  JSON.parse(spotify_user)
+    
+    useEffect(() => {
+        setSpotifyUser(spotify_user);
+        fetch('http://localhost:5000/get_room/1')
+        .then(res => res.json())
+        .then(data => {
+            setRoomData(data.content[0]);
+            setLoading(false);
+        })
+        
+    }, [])
+    
+    console.log(room_data)
     return (
         <div>
-            <Sidebar state={{user_state}}/>
-            {user_state.loading ? <p>Loading ...</p> : <p>This is room number: {'0001'}</p>}
+            <Sidebar spotify_user={spotify_user}/>
+            {loading ? <p>Loading ...</p> : <p>This is room number: {room_data.id}</p>}
         </div>
     )
 }
