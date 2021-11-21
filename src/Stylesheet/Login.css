@@ -6,6 +6,9 @@
 font-family: Spotify-thin;
 src: url('../Gotham-Font/Gotham-Thin.otf');
 }
+.thin-font{
+    font-family: Spotify-thin;
+}
 
 * {
     margin: 0;

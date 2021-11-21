@@ -14,22 +14,26 @@
     flex-direction: column;
     height: 100%;
     width: calc(100% - 150px);
-    background-color:red;
 }
 
 #playlist-preview{
     margin:auto;
     width: 100%;
-    height: 50%;
+    height: 54%;
     background-color: rgb(24, 24, 24);
 }
 #playlist-preview img{
+    margin-top: 20px;
     height: 300px;
     width: 300px;
+    cursor: pointer;
+}
+#playlist-preview p {
+    margin-bottom: 20px;
 }
 
 #playlist-controller{
-    height: 50%;
+    height: 46%;
     background-color: rgb(37, 37, 37);
 }
 #playlist-controller button{
@@ -43,13 +47,22 @@
 #playlist-controller input{
     width: 100%;
     margin-top: 40px;
+    height: 50px;
     background-color: rgb(37, 37, 37);
     border: none;
     border-bottom: solid black 1px;
     font-size: 20px;
     color: white;
     font-weight: 100;
+    font-family: Spotify-thin;
 }
+#chat-box{
+    height: 200px;
+    background-color: rgb(15, 15, 15);
+    overflow-y: scroll;
+}
+
+
 
 #players-in-room-title{
     margin: 10px;
