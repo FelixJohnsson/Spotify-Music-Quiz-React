@@ -1,29 +1,58 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import socketIOClient from "socket.io-client";
 import '../Stylesheet/RoomRight.css';
 import CircularProgress from '@mui/material/CircularProgress';
+import Messages from './Messages';
 
-const RoomRight = (props) => {
-    
+const roomID = window.location.href.split('/')[4];
+const spotify_user_data = localStorage.getItem('spotify_user_data');
+
+const spotify_user_JSON = JSON.parse(spotify_user_data) 
+
+
+const socket = socketIOClient(`http://localhost:5000`, {
+    withCredentials: true,
+
+    extraHeaders: {
+        "room_id": `${roomID}`
+    }
+});
+
+socket.on('connect', async () => {
+    console.log('Connected to server');
+    socket.emit('Display name', spotify_user_JSON.display_name);
+});
+
+socket.on('msg', (event) => {
+    const div = document.getElementById('chat-box');
+    const p = document.createElement('p');
+    const text = document.createTextNode(`${event.display_name}: ${event.msg}`);
+    p.appendChild(text);
+    div.appendChild(p);
+})
+
+const RoomRight = () => {
+    console.log('Render')
+    const [messages, setMessages] = useState([]);
     const [roomData, setRoomData] = useState(false);
     const [loading, setLoading] = useState(true);
-    
-    useEffect(() => {
-        const roomID = window.location.href.split('/')[4];
+    const [msg, setMsg] = useState(false);
+    const msgRef = useRef(false);
+
+
+
+    const msgHandler = (e) => {
+        socket.emit('msg', {display_name: spotify_user_JSON.display_name, msg: msg});
+        msgRef.current.value = '';
+    }
+
+    useEffect(() => {  
         fetch(`http://localhost:5000/get_room/${roomID}`)
         .then(res => res.json())
         .then(data => {
             setRoomData(data.content[0])
             setLoading(false);
-            const socket = socketIOClient(`http://localhost:5000`, {
-            withCredentials: true,
-
-            extraHeaders: {
-                "room_id": `${roomID}`
-            }
-            });
         })
-
     }, [])
     return (
         <div id="room-right-section">
@@ -38,36 +67,33 @@ const RoomRight = (props) => {
                         {loading ? <p></p> : <p className='thin-font'>{roomData.songs.length} songs in playlist.</p>}
                     </div>
                     <div id="playlist-controller">
-                        <button>Previous</button>
-                        <button>Play</button>
-                        <button>Pause</button>
-                        <button>Next</button>
+                        <div id="playlist-actions">
+                            <button>Previous</button>
+                            <button>Play</button>
+                            <button>Pause</button>
+                            <button>Next</button>
+                        </div>
+                        <div id="inputs">
+                            <div className="input-wrapper">
+                                <input type="text" placeholder="Your guess"></input>
+                                <button>Guess</button>
+                            </div>
+                            <div className="input-wrapper">
+                                <input autocomplete="off" type="text" placeholder="Send message" id="sendMessage" ref={msgRef} onChange={e => {setMsg(e.target.value)} }></input>
+                                <button onClick={msgHandler}>Send</button>
+                            </div>
+                        </div>
 
-                        <input type="text" placeholder="Your guess"></input>
-                        <input type="text" placeholder="Send message"></input>
                         <div id="chat-box">
 
                         </div>
                     </div>
                 </div>
 
-
-
-
             <div id="players-container">
             <p id="players-in-room-title">Players in room</p>
                 <hr></hr>
-                <div id="players-list">
-                    <div className="player-card">
-                        <p>User1</p>
-                    </div>
-                    <div className="player-card">
-                        <p>Guest</p>
-                    </div>
-                    <div className="player-card">
-                        <p>Felle21</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     ) 
