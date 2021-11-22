@@ -2,17 +2,19 @@ import { useState, useEffect, useRef } from 'react';
 import socketIOClient from "socket.io-client";
 import '../Stylesheet/RoomRight.css';
 import CircularProgress from '@mui/material/CircularProgress';
-import Messages from './Messages';
 
-const roomID = window.location.href.split('/')[4];
 const spotify_user_data = localStorage.getItem('spotify_user_data');
-
 const spotify_user_JSON = JSON.parse(spotify_user_data) 
 
+const tokens_data = localStorage.getItem('tokens');
+const tokens_JSON = JSON.parse(tokens_data) 
 
-const socket = socketIOClient(`http://localhost:5000`, {
+const roomID = localStorage.getItem('room');
+console.log(roomID)
+setTimeout(() => {console.log(roomID)}, 1000)
+
+const socket = socketIOClient(`http://localhost:5000/`, {
     withCredentials: true,
-
     extraHeaders: {
         "room_id": `${roomID}`
     }
@@ -24,6 +26,7 @@ socket.on('connect', async () => {
 });
 
 socket.on('msg', (event) => {
+    console.log('message received')
     const div = document.getElementById('chat-box');
     const p = document.createElement('p');
     const text = document.createTextNode(`${event.display_name}: ${event.msg}`);
@@ -36,6 +39,8 @@ const RoomRight = () => {
     const [messages, setMessages] = useState([]);
     const [roomData, setRoomData] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [localStorage, setLocalStorage] = useState(spotify_user_JSON);
+    const [tokens, setTokens] = useState(tokens_JSON);
     const [msg, setMsg] = useState(false);
     const msgRef = useRef(false);
 
@@ -47,13 +52,63 @@ const RoomRight = () => {
     }
 
     useEffect(() => {  
-        fetch(`http://localhost:5000/get_room/${roomID}`)
+        fetch(`http://localhost:5000/get_room/${window.location.href.split('/')[4]}`)
         .then(res => res.json())
         .then(data => {
-            setRoomData(data.content[0])
-            setLoading(false);
+            if(data.content != undefined){
+                setRoomData(data.content[0])
+                setLoading(false);
+            }
         })
     }, [])
+
+    const playHandler = () => {
+        //SEND EMIT
+        const room_data = {
+            room_id: roomID,
+            type: 'Increment room',
+            value: null
+        }
+        socket.emit('Play', { user: spotify_user_JSON.display_name, room:roomID});
+        //INCREMENT ROOM
+        fetch('http://localhost:5000/update_room', {
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+                body: JSON.stringify(room_data)
+            }
+        )
+        .then(res => res.json())
+        .then(data => {
+            const body = { 
+                context_uri:data.content.uri,
+                offset: {
+                    position: data.content.currently_playing_offset
+                  },
+                  position_ms: 0
+              }
+
+              console.log(body)
+            fetch(`https://api.spotify.com/v1/me/player/play`,{
+                body: JSON.stringify(body),
+                headers: {
+                    Accept: "application/json",
+                    Authorization: "Bearer " + tokens.access_token,
+                    "Content-Type": "application/json"
+                  }, 
+                  method:'PUT'
+                  
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))            
+
+        })
+        //PLAY
+
+
+    }
+
     return (
         <div id="room-right-section">
             
@@ -69,7 +124,7 @@ const RoomRight = () => {
                     <div id="playlist-controller">
                         <div id="playlist-actions">
                             <button>Previous</button>
-                            <button>Play</button>
+                            <button onClick={playHandler}>Play</button>
                             <button>Pause</button>
                             <button>Next</button>
                         </div>
@@ -79,7 +134,7 @@ const RoomRight = () => {
                                 <button>Guess</button>
                             </div>
                             <div className="input-wrapper">
-                                <input autocomplete="off" type="text" placeholder="Send message" id="sendMessage" ref={msgRef} onChange={e => {setMsg(e.target.value)} }></input>
+                                <input autoComplete="off" type="text" placeholder="Send message" id="sendMessage" ref={msgRef} onChange={e => {setMsg(e.target.value)} }></input>
                                 <button onClick={msgHandler}>Send</button>
                             </div>
                         </div>

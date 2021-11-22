@@ -20,7 +20,10 @@ const PlaylistCard = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-            history.push(`/room/${data.content.id}`);
+            console.log(data.content.id)
+            localStorage.setItem('room', data.content.id)
+            console.log(localStorage.getItem('room'))
+            setTimeout(() => {history.push(`/room/${data.content.id}`);}, 100)
         })
     })}>
         <img src={props.playlist_object.img_src}></img>

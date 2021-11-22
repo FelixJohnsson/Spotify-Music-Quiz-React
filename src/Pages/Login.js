@@ -55,7 +55,7 @@ class Login extends React.Component {
                     </p>
                 </div>
                 <button onClick={login}>Login</button>
-                <button id="decline-button">Decline</button>
+                <button onClick={close_login_div} id="decline-button">Decline</button>
             </div>
         </div>
             )
@@ -67,7 +67,10 @@ const open_login_div = () => {
     document.getElementById('login-div').style.display = 'block';
     document.getElementById('login-div').classList.add('fade-in');
     document.getElementById('background').style.filter = 'blur(10px)';
-
+}
+const close_login_div = () => {
+    document.getElementById('login-div').style.display = 'none';
+    document.getElementById('background').style.filter = 'blur(0px)';
 }
 
 const login = () => {
