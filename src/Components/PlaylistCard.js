@@ -1,13 +1,13 @@
 import '../Stylesheet/Cards.css'
-import { useHistory } from "react-router-dom";
 
 const PlaylistCard = (props) => {
-    const history = useHistory();
+
     const body = {
         URI:props.playlist_object.URI,
         token: props.tokens.access_token,
         id: props.spotify_user.display_name
     }
+    
     return (
     <div className="playlist-card" onClick={(async (e) => {
 
@@ -23,7 +23,6 @@ const PlaylistCard = (props) => {
             console.log(data.content.id)
             localStorage.setItem('room', data.content.id)
             console.log(localStorage.getItem('room'))
-            setTimeout(() => {history.push(`/room/${data.content.id}`);}, 100)
         })
     })}>
         <img src={props.playlist_object.img_src}></img>

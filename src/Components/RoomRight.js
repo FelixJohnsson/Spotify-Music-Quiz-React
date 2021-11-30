@@ -39,7 +39,6 @@ const RoomRight = () => {
     const [messages, setMessages] = useState([]);
     const [roomData, setRoomData] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [localStorage, setLocalStorage] = useState(spotify_user_JSON);
     const [tokens, setTokens] = useState(tokens_JSON);
     const [msg, setMsg] = useState(false);
     const msgRef = useRef(false);

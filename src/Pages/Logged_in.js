@@ -6,6 +6,8 @@ import '../Stylesheet/Logged_in.css';
 
 const Logged_in = (props) => {
     const URL_array = window.location.href.split('/')[4].split('&');
+    localStorage.setItem('room', false);
+
     const url_tokens = {
         access_token: URL_array[0].split('=')[1],
         refresh_token: URL_array[1].split('=')[1],
@@ -13,23 +15,19 @@ const Logged_in = (props) => {
         username: URL_array[3].split('=')[1]
     }
     localStorage.setItem('tokens', JSON.stringify(url_tokens));
-    const [tokens, setTokens] = useState(url_tokens)
-    const [localUserState, setlocalUserState] = useState(false);
+    useEffect(() => {props.changeToken(url_tokens)},[])
+    
+
     const [spotifyUser, setspotifyUser] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    
-
     useEffect(() => {
-        const get_user_from_app_URL = 'http://localhost:5000/get_user/felle21';
         const fetch_data = async () => {
-            fetch(get_user_from_app_URL)
-            .then(data => setlocalUserState(data));
     
             fetch(`https://api.spotify.com/v1/me`,{
                 headers: {
                     Accept: "application/json",
-                    Authorization: "Bearer " + tokens.access_token,
+                    Authorization: "Bearer " + url_tokens.access_token,
                     "Content-Type": "application/json"
                   }
             })
@@ -47,7 +45,7 @@ const Logged_in = (props) => {
         return(
             <div>
                 <Sidebar spotify_user={spotifyUser} loading={loading}/>
-                <SectionRight spotify_user={spotifyUser} tokens={tokens} />
+                <SectionRight spotify_user={spotifyUser} />
             </div>
         )
     } else {
@@ -58,7 +56,6 @@ const Logged_in = (props) => {
         )
 
     }
-
 }
 
 

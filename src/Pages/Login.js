@@ -3,11 +3,7 @@ import '../Stylesheet/Login.css';
 import logo from '../Stylesheet/spotify-logo.png';
 
 class Login extends React.Component {
-    state = {
 
-    }
-    componentDidMount(){
-    }
     render(){
         return (
         <div>
