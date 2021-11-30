@@ -10,8 +10,6 @@ const tokens_data = localStorage.getItem('tokens');
 const tokens_JSON = JSON.parse(tokens_data) 
 
 const roomID = localStorage.getItem('room');
-console.log(roomID)
-setTimeout(() => {console.log(roomID)}, 1000)
 
 const socket = socketIOClient(`http://localhost:5000/`, {
     withCredentials: true,

@@ -14,7 +14,6 @@ const Logged_in = (props) => {
         id: URL_array[2].split('=')[1],
         username: URL_array[3].split('=')[1]
     }
-    localStorage.setItem('tokens', JSON.stringify(url_tokens));
     useEffect(() => {props.changeToken(url_tokens)},[])
     
 

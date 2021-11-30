@@ -5,8 +5,6 @@ import '../Stylesheet/SectionRight.css'
 
 const SectionRight = (props) => {
     const get_recommended_playlists_URL = 'http://localhost:5000/get_recommended';
-    const tokens_data = localStorage.getItem('tokens');
-    const tokens = JSON.parse(tokens_data) 
 
     let [cardComponents, setCardComponents] = useState([]);
 
@@ -15,7 +13,7 @@ const SectionRight = (props) => {
             .then(res => res.json())
             .then(data => {
                 let array_of_cards = data.content.map((el, index) => {
-                    return <PlaylistCard key={index} playlist_object={el} spotify_user={props.spotify_user} tokens={tokens} id={el.URI}/>
+                    //return <PlaylistCard key={index} playlist_object={el} spotify_user={props.spotify_user} tokens={tokens} id={el.URI}/>
                 })
                 setCardComponents(array_of_cards);
             })
