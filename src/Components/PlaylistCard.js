@@ -1,16 +1,15 @@
 import '../Stylesheet/Cards.css'
+import { useNavigate } from "react-router-dom";
 
 const PlaylistCard = (props) => {
-
     const body = {
         URI:props.playlist_object.URI,
         token: props.tokens.access_token,
-        id: props.spotify_user.display_name
+        id: props.spotifyData.display_name
     }
-    
     return (
     <div className="playlist-card" onClick={(async (e) => {
-
+        console.log('CLOICK')
         fetch('http://localhost:5000/init_new_room', {
             method: 'POST',
             headers: {
@@ -20,9 +19,7 @@ const PlaylistCard = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data.content.id)
-            localStorage.setItem('room', data.content.id)
-            console.log(localStorage.getItem('room'))
+            useNavigate.push(`/room/${data.content.id}`);
         })
     })}>
         <img src={props.playlist_object.img_src}></img>
@@ -33,3 +30,4 @@ const PlaylistCard = (props) => {
 }
 
 export default PlaylistCard;
+

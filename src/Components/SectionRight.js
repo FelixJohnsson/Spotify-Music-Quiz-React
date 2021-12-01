@@ -13,7 +13,7 @@ const SectionRight = (props) => {
             .then(res => res.json())
             .then(data => {
                 let array_of_cards = data.content.map((el, index) => {
-                    //return <PlaylistCard key={index} playlist_object={el} spotify_user={props.spotify_user} tokens={tokens} id={el.URI}/>
+                    return <PlaylistCard key={index} playlist_object={el} spotifyData={props.spotifyData} tokens={props.tokens} id={el.URI}/>
                 })
                 setCardComponents(array_of_cards);
             })

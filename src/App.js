@@ -8,35 +8,60 @@ import Room from './Pages/Room.js';
 function App() {
   const [loading, setLoading] = useState(true);
   
-  const [tokens, setTokens] = useState(false);
+  const [tokens, setTokens] = useState({});
   const [spotifyData, setSpotifyData] = useState(false);
   const [localData, setLocalData] = useState(false);
   const [roomData, setRoomData] = useState(false);
   
-const fetch_data = async () => {
-      const data = await fetch(`https://api.spotify.com/v1/me`,{
+  const getTokens = (data) => {
+    setTokens(data);
+    fetch_data(data);
+  }
+
+  const fetch_data = async (user) => {
+      await fetch(`https://api.spotify.com/v1/me`,{
           headers: {
               Accept: "application/json",
-              Authorization: "Bearer " + tokens.access_token,
+              Authorization: "Bearer " + user.access_token,
               "Content-Type": "application/json"
             }
       })
       .then(res => res.json())
-      .then(data => data)
-      return data;
+      .then(data => setSpotifyData(data))
+      
+      fetch(`http://localhost:5000/get_user/${user.id}`)
+      .then(res => res.json())
+      .then(userFound => {
+        if(userFound.statusCode === 400){
+          const body = {username: user.username, id:user.id}
+          fetch(`http://localhost:5000/add_user`, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body:JSON.stringify(body)
+          })
+          .then(res => res.json())
+          .then(data => {
+            setLocalData(data.content);
+            setLoading(false);
+          })
+
+        } else if(userFound.statusCode === 200){
+          setLocalData(userFound.content);
+          setLoading(false);
+        }
+      })
   }
 
-  if(tokens){
-    fetch_data()
-    .then(data => console.log(data))
-  }
+
 
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={ <Login />} exact />
-        <Route path="/logged_in/:data" element={ <Logged_in changeToken={tokens => setTokens(tokens)}/>} />
+        <Route path="/logged_in/:data" element={ <Logged_in spotifyData={spotifyData} tokens={tokens} localUserData={localData} loading={loading} changeToken={tokens => getTokens(tokens)}/>}/>
         <Route path="/room" element={ <Room />} />
       </Routes>
     </BrowserRouter>

@@ -95,7 +95,6 @@ const RoomRight = () => {
                     "Content-Type": "application/json"
                   }, 
                   method:'PUT'
-                  
             })
             .then(res => res.json())
             .then(data => console.log(data))            
