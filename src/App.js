@@ -1,18 +1,17 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import Login from './Pages/Login.js';
 import Logged_in from './Pages/Logged_in.js';
 import Room from './Pages/Room.js';
 
 
 function App() {
+
   const [loading, setLoading] = useState(true);
-  
   const [tokens, setTokens] = useState({});
   const [spotifyData, setSpotifyData] = useState(false);
   const [localData, setLocalData] = useState(false);
-  const [roomData, setRoomData] = useState(false);
-  
+
   const getTokens = (data) => {
     setTokens(data);
     fetch_data(data);
@@ -27,7 +26,9 @@ function App() {
             }
       })
       .then(res => res.json())
-      .then(data => setSpotifyData(data))
+      .then(data => {
+        setSpotifyData(data)
+      })
       
       fetch(`http://localhost:5000/get_user/${user.id}`)
       .then(res => res.json())
@@ -54,15 +55,12 @@ function App() {
       })
   }
 
-
-
-
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={ <Login />} exact />
         <Route path="/logged_in/:data" element={ <Logged_in spotifyData={spotifyData} tokens={tokens} localUserData={localData} loading={loading} changeToken={tokens => getTokens(tokens)}/>}/>
-        <Route path="/room" element={ <Room />} />
+        <Route path="/room/:id" element={ <Room spotifyData={spotifyData} tokens={tokens} localUserData={localData}/>} />
       </Routes>
     </BrowserRouter>
   );

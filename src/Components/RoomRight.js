@@ -3,11 +3,13 @@ import socketIOClient from "socket.io-client";
 import '../Stylesheet/RoomRight.css';
 import CircularProgress from '@mui/material/CircularProgress';
 
+
 const spotify_user_data = localStorage.getItem('spotify_user_data');
 const spotify_user_JSON = JSON.parse(spotify_user_data) 
 
 const tokens_data = localStorage.getItem('tokens');
 const tokens_JSON = JSON.parse(tokens_data) 
+
 
 const roomID = localStorage.getItem('room');
 
@@ -20,7 +22,8 @@ const socket = socketIOClient(`http://localhost:5000/`, {
 
 socket.on('connect', async () => {
     console.log('Connected to server');
-    socket.emit('Display name', spotify_user_JSON.display_name);
+    if(spotify_user_JSON) socket.emit('Display name', spotify_user_JSON.display_name);
+    
 });
 
 socket.on('msg', (event) => {

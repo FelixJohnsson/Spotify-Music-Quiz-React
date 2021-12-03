@@ -2,6 +2,7 @@ import '../Stylesheet/Cards.css'
 import { useNavigate } from "react-router-dom";
 
 const PlaylistCard = (props) => {
+    const navigate = useNavigate();
     const body = {
         URI:props.playlist_object.URI,
         token: props.tokens.access_token,
@@ -9,7 +10,6 @@ const PlaylistCard = (props) => {
     }
     return (
     <div className="playlist-card" onClick={(async (e) => {
-        console.log('CLOICK')
         fetch('http://localhost:5000/init_new_room', {
             method: 'POST',
             headers: {
@@ -19,7 +19,8 @@ const PlaylistCard = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-            useNavigate.push(`/room/${data.content.id}`);
+            
+            navigate(`/room/${data.content.id}`);
         })
     })}>
         <img src={props.playlist_object.img_src}></img>

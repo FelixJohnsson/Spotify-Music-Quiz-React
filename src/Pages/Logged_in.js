@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Sidebar from '../Components/Sidebar.js';
 import SectionRight from '../Components/SectionRight.js';
@@ -13,6 +12,12 @@ const Logged_in = (props) => {
         username: URL_array[3].split('=')[1]
     }
     useEffect(() => {props.changeToken(url_tokens)},[])
+
+    localStorage.setItem('logged_in', true);
+    localStorage.setItem('access_token', url_tokens.access_token);
+    localStorage.setItem('refresh_token', url_tokens.refresh_token);
+    localStorage.setItem('display_name', url_tokens.username);
+    localStorage.setItem('time_loggedin', Date.now());
 
     if(!props.loading){
         return(

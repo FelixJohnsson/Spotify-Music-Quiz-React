@@ -6,11 +6,12 @@ import '../Stylesheet/Room.css';
 
 const Room =  (props) => {
     const [loading, setLoading] = useState(true);
-    const [spotify_user_data, setSpotifyUser] = useState(false);
+    const [spotifyData, setSpotifyData] = useState(props.spotifyData);
     const [room_data, setRoomData] = useState(false);
-    let spotify_user = localStorage.getItem('spotify_user_data');
-    spotify_user =  JSON.parse(spotify_user)
-    
+    const [tokens, setTokens] = useState(props.tokens);
+    const [localData, setLocalData] = useState(props.localUserData);
+
+    console.log(spotifyData)
     useEffect(() => {
         
         fetch('http://localhost:5000/get_room/1')
@@ -18,15 +19,14 @@ const Room =  (props) => {
         .then(data => {
             setRoomData(data.content[0]);
             setLoading(false);
-            setSpotifyUser(spotify_user);
         })
         
     }, [])
     
     return (
         <div>
-            <Sidebar spotify_user={spotify_user_data}/>
-            <RoomRight spotify_user={spotify_user_data} room_data={room_data} loading={loading}/>
+            <Sidebar spotifyData={spotifyData} loading={loading} />
+            <RoomRight spotify_user={spotifyData} room_data={room_data} loading={loading}/>
         </div>
     )
 }
