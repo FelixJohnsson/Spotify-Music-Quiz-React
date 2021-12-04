@@ -4,6 +4,7 @@ import Avatar from '@mui/material/Avatar';
 const ImageAvatars = (props) => {
   
   if(props.spotify_user){
+      console.log(props.spotify_user.images)
     return (
         <Avatar alt={props.spotify_user.display_name} src={props.spotify_user.images[0].url} id="avatar"/>
     )
