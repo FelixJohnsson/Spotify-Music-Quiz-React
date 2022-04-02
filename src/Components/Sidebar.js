@@ -7,20 +7,11 @@ import '../Stylesheet/Logged_in.css'
 const Sidebar = (props) => {
     const [loggedIn, setLoggedIn] = useState(null);
 
-    if(!props.spotifyData && localStorage.getItem('logged_in') === 'false'){
-        useState(false);
-    } else if(!props.spotifyData && localStorage.getItem('logged_in') === 'true'){
-        console.log('Youre logged in but we dont have your data in state')
-    } else {
-        useState(true);
-    }
     
     return(
         <div id="left-sidebar">
-            {loading}
-                
             <div id="wrapper">
-                {avatar}
+                {Avatar}
                 <div className="sidebar-category-div">
                     {loggedIn}
                 </div>

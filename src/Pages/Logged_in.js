@@ -22,7 +22,6 @@ const Logged_in = (props) => {
     if(!props.loading){
         return(
             <div>
-                <Sidebar spotifyData={props.spotifyData} loading={props.loading}/>
                 <SectionRight spotifyData={props.spotifyData} tokens={props.tokens}/>
             </div>
         )
